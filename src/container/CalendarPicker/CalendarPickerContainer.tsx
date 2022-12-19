@@ -38,6 +38,8 @@ const CalendarPickerContainer: React.FC = () => {
             return month + 1;
           } else {
             setCurrentYear((year) => {
+              console.log(year);
+
               return year + 1;
             });
             return 0;
@@ -48,6 +50,7 @@ const CalendarPickerContainer: React.FC = () => {
             return month - 1;
           } else {
             setCurrentYear((year) => {
+              console.log(year);
               return year - 1;
             });
             return 11;
@@ -55,41 +58,41 @@ const CalendarPickerContainer: React.FC = () => {
         });
   };
 
-  //   useEffect(() => {
-  //     const MonthDates = getAllDaysOfTheMonth(currentMonth + 1, currentYear);
-  //     const beforeDates = getExtraDays(
-  //       MonthDates[0],
-  //       MonthDates[0]?.getDay(),
-  //       "BEFORE"
-  //     );
+  // useEffect(() => {
+  //   const MonthDates = getAllDaysOfTheMonth(currentMonth + 1, currentYear);
+  //   const beforeDates = getExtraDays(
+  //     MonthDates[0],
+  //     MonthDates[0]?.getDay(),
+  //     "BEFORE"
+  //   );
 
-  //     const tempDates = [...beforeDates, ...MonthDates];
-  //     const futureDates = getExtraDays(
-  //       tempDates[tempDates.length - 1],
-  //       35 - tempDates.length,
-  //       "AFTER"
-  //     );
-  //     setDateArray([...beforeDates, ...MonthDates, ...futureDates]);
-  //     console.log([...beforeDates, ...MonthDates, ...futureDates]);
-  //   }, []);
+  //   const tempDates = [...beforeDates, ...MonthDates];
+  //   const futureDates = getExtraDays(
+  //     tempDates[tempDates.length - 1],
+  //     35 - tempDates.length,
+  //     "AFTER"
+  //   );
+  //   setDateArray([...beforeDates, ...MonthDates, ...futureDates]);
+  //   console.log([...beforeDates, ...MonthDates, ...futureDates]);
+  // }, []);
 
   useMemo(() => {
-    const tempDates = getAllDaysOfTheMonth(currentMonth + 1, currentYear);
+    const MonthDates = getAllDaysOfTheMonth(currentMonth + 1, currentYear);
     const beforeDates = getExtraDays(
-      tempDates[0],
-      tempDates[0]?.getDay(),
+      MonthDates[0],
+      MonthDates[0]?.getDay(),
       "BEFORE"
     );
+
+    const tempDates = [...beforeDates, ...MonthDates];
     const futureDates = getExtraDays(
       tempDates[tempDates.length - 1],
       35 - tempDates.length,
       "AFTER"
     );
-    setDateArray([...beforeDates, ...tempDates, ...futureDates]);
-    console.log([...beforeDates, ...tempDates]);
-
-    console.log(currentYear);
-  }, [currentMonth, currentYear]);
+    setDateArray([...beforeDates, ...MonthDates, ...futureDates]);
+    console.log([...beforeDates, ...MonthDates, ...futureDates]);
+  }, [currentMonth]);
 
   return (
     <>
